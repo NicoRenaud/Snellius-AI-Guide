@@ -7,7 +7,7 @@
 
 
 CONTAINER_URL=nvcr.io/nvidia/pytorch:25.10-py3
-CONTAINER_NAME=megatron-torch-2.7-nvcr.25-10.sif
+CONTAINER_NAME=snellius-ai-guide-torch-2.7-nvcr.25-10.sif
 
 # enter your project space path e.g. PROJECT_SPACE=/projects/0/prjsXXXX
 # if you didn't add the path to your bashrc
@@ -28,7 +28,7 @@ mkdir -p $APPTAINER_TMPDIR $APPTAINER_CACHEDIR $CONTAINER_OUTPUT_DIR
 CONTAINER_OUTPUT_PATH=$CONTAINER_OUTPUT_DIR/$CONTAINER_NAME
 
 # Define apptainer definition file inline for more flexibility
-TMP_CONTAINER_FILENAME=/dev/shm/$USER/megatron.def
+TMP_CONTAINER_FILENAME=/dev/shm/$USER/snellius_ai_guide.def
 
 cat <<EOF > $TMP_CONTAINER_FILENAME
 Bootstrap: docker
