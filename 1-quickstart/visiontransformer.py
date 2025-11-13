@@ -60,6 +60,9 @@ if __name__ == "__main__":
 
     args = ArgumentParser()
     args.add_argument("--data_path", type=str)
+    args.add_argument("--num_workers", type=int, default=0)
+    args.add_argument("--epochs", type=int, default=10)
+    args.add_argument("--batch_size", type=int, default=32)
     args = args.parse_args()
 
     full_train_dataset = HFDataset(args.data_path, 
@@ -71,8 +74,8 @@ if __name__ == "__main__":
     train_dataset, val_dataset = random_split(
         full_train_dataset, [train_size, val_size]
     )
-    train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True, num_workers=7)
-    val_loader = DataLoader(val_dataset, batch_size=32, shuffle=True, num_workers=7)
-    train_model(model, criterion, optimizer, train_loader, val_loader)
+    train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, num_workers=args.num_workers)
+    val_loader = DataLoader(val_dataset, batch_size=args.batch_size, shuffle=True, num_workers=args.num_workers)
+    train_model(model, criterion, optimizer, train_loader, val_loader, epochs=args.epochs)
 
     torch.save(model.state_dict(), "vit_b_16_imagenet.pth")
