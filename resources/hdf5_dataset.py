@@ -3,7 +3,6 @@ from torch.utils.data import Dataset
 from torchvision.transforms.functional import to_pil_image
 import h5py
 
-
 class HDF5Dataset(Dataset):
     def __init__(self, file_path, transform=None):
         self.file_path = file_path

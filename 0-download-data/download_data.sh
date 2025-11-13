@@ -15,7 +15,7 @@ if [ -z "$PROJECT_SPACE" ]; then
   exit 1
 fi
 
-CONTAINER_NAME=snellius-ai-guide-torch-2.7-nvcr.25-10.sifs
+CONTAINER=$PROJECT_SPACE/containers/snellius-ai-guide-torch-2.7-nvcr.25-10.sif
 BIND_PATH=$PROJECT_SPACE
 
-apptainer exec --env "PROJECT_SPACE=$PROJECT_SPACE"  -B $BIND_PATH $CONTAINER python download_data.py
+apptainer exec --env "PROJECT_SPACE=$PROJECT_SPACE" -B $BIND_PATH $CONTAINER python download_data.py

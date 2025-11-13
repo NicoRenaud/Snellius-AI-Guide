@@ -4,9 +4,10 @@ import torchvision.transforms as transforms
 from torchvision.models import vit_b_16
 import sys
 import os
+from argparse import ArgumentParser
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from resources.hdf5_dataset import HDF5Dataset
+from resources.hf_dataset import HFDataset
 
 # Define transformations for dataset
 transform = transforms.Compose(
@@ -55,9 +56,15 @@ def train_model(model, criterion, optimizer, train_loader, val_loader, epochs=10
         print(f"Accuracy: {100 * correct / total}%")
 
 
-with HDF5Dataset(
-    "../resources/train_images.hdf5", transform=transform
-) as full_train_dataset:
+if __name__ == "__main__":
+
+    args = ArgumentParser()
+    args.add_argument("--data_path", type=str)
+    args = args.parse_args()
+
+    full_train_dataset = HFDataset(args.data_path, 
+                                transform=transform) 
+
     # Splitting the dataset into train and validation sets
     train_size = int(0.8 * len(full_train_dataset))
     val_size = len(full_train_dataset) - train_size
@@ -68,4 +75,4 @@ with HDF5Dataset(
     val_loader = DataLoader(val_dataset, batch_size=32, shuffle=True, num_workers=7)
     train_model(model, criterion, optimizer, train_loader, val_loader)
 
-torch.save(model.state_dict(), "vit_b_16_imagenet.pth")
+    torch.save(model.state_dict(), "vit_b_16_imagenet.pth")
