@@ -60,7 +60,7 @@ if __name__ == "__main__":
 
     args = ArgumentParser()
     args.add_argument("--data_path", type=str)
-    args.add_argument("--num_workers", type=int, default=0)
+    args.add_argument("--num_workers", type=int, default=7)
     args.add_argument("--epochs", type=int, default=10)
     args.add_argument("--batch_size", type=int, default=32)
     args = args.parse_args()

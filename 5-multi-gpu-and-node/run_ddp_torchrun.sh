@@ -1,24 +1,30 @@
 #!/bin/bash
-#SBATCH --account=project_xxxxxxxxx
-#SBATCH --partition=standard-g
+#SBATCH --partition=gpu_h100
 #SBATCH --nodes=1
-#SBATCH --gpus-per-node=8
+#SBATCH --ntasks-per-node=4
+#SBATCH --cpus-per-task=16
+#SBATCH --gpus-per-node=4
 #SBATCH --time=1:00:00
+#SBATCH --exclusive
 
-#SBATCH --ntasks=1
-#SBATCH --cpus-per-task=56
-#SBATCH --mem=480G
 
-# this module facilitates the use of singularity containers on LUMI
-module use  /appl/local/containers/ai-modules
-module load singularity-AI-bindings
 
-# choose container that is copied over by set_up_environment.sh
-CCONTAINER=../resources/lumi-pytorch-rocm-6.2.4-python-3.12-pytorch-v2.7.1.sif
+# enter your project space path e.g. PROJECT_SPACE=/projects/0/prjsXXXX
+# if you didn't add the path to your bashrc
+PROJECT_SPACE=/scratch-shared/nicolasr
+
+if [ -z "$PROJECT_SPACE" ]; then
+  echo "Error: PROJECT_SPACE is not set. Please set the project space path in this script. Example: export PROJECT_SPACE=/projects/0/prjsXXXX"
+  exit 1
+fi
+
+CONTAINER=$PROJECT_SPACE/containers/snellius-ai-guide-torch-2.7-nvcr.25-10.sif
+IMAGENET=$PROJECT_SPACE/datasets/imagenet/tiny-imagenet-200.hf
+WORKERS=${SLURM_CPUS_PER_TASK:-16}
+BIND_PATH=$PROJECT_SPACE
 
 # Tell RCCL to use Slingshot interfaces and GPU RDMA
 export NCCL_SOCKET_IFNAME=hsn0,hsn1,hsn2,hsn3
 export NCCL_NET_GDR_LEVEL=PHB
 
-export SINGULARITYENV_PREPEND_PATH=/user-software/bin
-srun singularity exec -B ../resources/visiontransformer-env.sqsh:/user-software:image-src=/ $CONTAINER bash -c 'python -m torch.distributed.run --standalone --nnodes=1 --nproc_per_node=8 ddp_visiontransformer.py'
+apptainer exec -B $BIND_PATH $CONTAINER bash -c 'python -m torch.distributed.run --standalone --nnodes=1 --nproc_per_node=8 ddp_visiontransformer.py'
