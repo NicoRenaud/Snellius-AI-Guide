@@ -1,11 +1,10 @@
 #!/bin/bash
 #SBATCH --partition=gpu_h100
 #SBATCH --nodes=1
-#SBATCH --ntasks-per-node=4
-#SBATCH --cpus-per-task=16
-#SBATCH --gpus-per-node=4
+#SBATCH --ntasks-per-node=2
+#SBATCH --cpus-per-task=8
+#SBATCH --gpus-per-node=2
 #SBATCH --time=1:00:00
-#SBATCH --exclusive
 
 
 
@@ -18,6 +17,15 @@ if [ -z "$PROJECT_SPACE" ]; then
   exit 1
 fi
 
+export MASTER_PORT=$(expr 10000 + $(echo -n $SLURM_JOBID | tail -c 4))
+export WORLD_SIZE=$(($SLURM_NNODES * $SLURM_NTASKS_PER_NODE))
+echo "WORLD_SIZE="$WORLD_SIZE
+
+master_addr=$(scontrol show hostnames "$SLURM_JOB_NODELIST" | head -n 1)
+export MASTER_ADDR=$master_addr
+echo "MASTER_ADDR="$MASTER_ADDR
+
+
 CONTAINER=$PROJECT_SPACE/containers/snellius-ai-guide-torch-2.7-nvcr.25-10.sif
 IMAGENET=$PROJECT_SPACE/datasets/imagenet/tiny-imagenet-200.hf
 WORKERS=${SLURM_CPUS_PER_TASK:-16}
@@ -27,4 +35,4 @@ BIND_PATH=$PROJECT_SPACE
 export NCCL_SOCKET_IFNAME=hsn0,hsn1,hsn2,hsn3
 export NCCL_NET_GDR_LEVEL=PHB
 
-apptainer exec -B $BIND_PATH $CONTAINER bash -c 'python -m torch.distributed.run --standalone --nnodes=1 --nproc_per_node=8 ddp_visiontransformer.py'
+apptainer exec -B $BIND_PATH $CONTAINER bash -c 'python -m torch.distributed.run --standalone --nnodes=1 --nproc_per_node=2 ddp_visiontransformer.py'
