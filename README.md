@@ -5,7 +5,7 @@ This Guide is adapted from the excellent [LUMI-AI-Guide](https://github.com/Lumi
 
 This guide is designed to assist users in migrating their machine learning applications from smaller-scale computing environments to Snellius. We will walk you through a detailed example of training an image classification model using [PyTorch's Vision Transformer (VIT)](https://pytorch.org/vision/main/models/vision_transformer.html) on the [ImageNet dataset](https://www.image-net.org/).
 
-All Python and bash scripts referenced in this guide are accessible in this [GitHub repository](https://github.com/nicorenaud/snellius-ai-guide/tree/main). We start with a basic python script, [visiontransformer.py](1-quickstart/visiontransformer.py), that could run on your local machine and modify it over the next chapters to run it efficiently on Snellius.
+All Python and bash scripts referenced in this guide are accessible in this [GitHub repository](https://github.com/nicorenaud/snellius-ai-guide/tree/main). We start with a basic python script, [visiontransformer.py](2-first-run/visiontransformer.py), that could run on your local machine and modify it over the next chapters to run it efficiently on Snellius.
 
 Even though this guide uses PyTorch, most of the covered topics are independent of the used machine learning framework. We therefore believe this guide is helpful for all new ML users on Snellius while also providing a concrete example that runs on Snellius.
 
@@ -13,9 +13,21 @@ Even though this guide uses PyTorch, most of the covered topics are independent 
 
 Before proceeding, please ensure you meet the following prerequisites:
 
-* A basic understanding of machine learning concepts and Python programming. This guide will focus primarily on aspects specific to training models on LUMI.
-* An active user account on LUMI and familiarity with its basic operations.
-* If you wish to run the included examples, you need to be part of a project with GPU hours on LUMI.
+* A basic understanding of machine learning concepts and Python programming. This guide will focus primarily on aspects specific to training models on Snellius.
+* An active user account on Snellius and familiarity with its basic operations.
+* If you wish to run the included examples, you need to be part of a project with GPU hours on Snellius.
+
+
+### Set up
+
+To use this tutorial, you must first clone this repository to your Snellius via the following command:
+
+```bash
+git clone https://github.com/nicorenaud/Snellius-AI-guide
+```
+
+We recommend using your `/project/` or `/scratch-shared/` directory to clone the repository as your home directory (`$HOME`) has a capacity of 20 GB and is intended to store user configuration files and personal data.
+
 
 ### Table of contents
 

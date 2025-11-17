@@ -1,11 +1,6 @@
-# 1.Downloading the data  
+# 1. Downloading the data  
 
-# Downloading the Dataset
-- Estimated time: 20 minutes
-
-In this tutorial, we are using HuggingFace's [tiny-imagenet-200](https://huggingface.co/datasets/slegroux/tiny-imagenet-200-clean) dataset. 
-
-To download the dataset simply use:
+Most machine learning pipelines require the use of a large data set to train the model. In this tutorial, we are using HuggingFace's [tiny-imagenet-200](https://huggingface.co/datasets/slegroux/tiny-imagenet-200-clean) dataset.  To download this dataset simply use the prvided bash script:
 
 ```bash
 sbatch download_data.job

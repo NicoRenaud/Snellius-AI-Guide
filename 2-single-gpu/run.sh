@@ -1,9 +1,10 @@
 #!/bin/bash
 #SBATCH --nodes=1
-#SBATCH --partition=rome
+#SBATCH --partition=gpu_a100
+#SBATCH --gpus-per-task=1
 #SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=16
 #SBATCH --time=10:00:00
-#SBATCH --exclusive
 
 # enter your project space path e.g. PROJECT_SPACE=/projects/0/prjsXXXX
 # if you didn't add the path to your bashrc
