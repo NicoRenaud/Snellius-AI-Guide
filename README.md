@@ -23,7 +23,7 @@ Before proceeding, please ensure you meet the following prerequisites:
 To use this tutorial, you must first clone this repository to your Snellius via the following command:
 
 ```bash
-git clone https://github.com/nicorenaud/Snellius-AI-guide
+git clone https://github.com/surf-ml/Snellius-AI-guide
 ```
 
 We recommend using your `/project/` or `/scratch-shared/` directory to clone the repository as your home directory (`$HOME`) has a capacity of 20 GB and is intended to store user configuration files and personal data.
