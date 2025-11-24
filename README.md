@@ -5,7 +5,7 @@ This Guide is adapted from the excellent [LUMI-AI-Guide](https://github.com/Lumi
 
 This guide is designed to assist users in migrating their machine learning applications from smaller-scale computing environments to Snellius. We will walk you through a detailed example of training an image classification model using [PyTorch's Vision Transformer (VIT)](https://pytorch.org/vision/main/models/vision_transformer.html) on the [ImageNet dataset](https://www.image-net.org/).
 
-All Python and bash scripts referenced in this guide are accessible in this [GitHub repository](https://github.com/nicorenaud/snellius-ai-guide/tree/main). We start with a basic python script, [visiontransformer.py](2-first-run/visiontransformer.py), that could run on your local machine and modify it over the next chapters to run it efficiently on Snellius.
+All Python and bash scripts referenced in this guide are accessible in this [GitHub repository](https://github.com/surf-ml/snellius-ai-guide/tree/main). We start with a basic python script, [visiontransformer.py](2-first-run/visiontransformer.py), that could run on your local machine and modify it over the next chapters to run it efficiently on Snellius.
 
 Even though this guide uses PyTorch, most of the covered topics are independent of the used machine learning framework. We therefore believe this guide is helpful for all new ML users on Snellius while also providing a concrete example that runs on Snellius.
 
