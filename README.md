@@ -33,17 +33,18 @@ We recommend using your `/project/` or `/scratch-shared/` directory to clone the
 
 The guide is structured into the following sections:
 
-- [1. QuickStart](1-quickstart/README.md)
-- [2. Setting up your own environment](2-setting-up-environment/README.md)
-- [3. File formats for training data](3-file-formats/README.md)
-- [4. Data Storage Options](4-data-storage/README.md)
-- [5. Multi-GPU and Multi-Node Training](5-multi-gpu-and-node/README.md)
-- [6. Monitoring and Profiling jobs](6-monitoring-and-profiling/README.md)
-- [7. TensorBoard visualization](7-TensorBoard-visualization/README.md)
-- [8. MLflow visualization](8-MLflow-visualization/README.md)
-- [9. Wandb visualization](9-Wandb-visualization/README.md)
+- [00. Setting up the environment](00-setting-up-environement/README.md)
+- [01. Downloading the data](01-downloading-data/README.md)
+- [02. Single CPU/GPU run](02-single-gpu/README.md)
+- [03. Multi GPU run with srun](03-multi-gpu-srun/README.md)
+- [04. Multi GPU run with torchrun](04-multi-gpu-torchrun/README.md)
+- [05. Multi Node run with torchrun](05-multi-nodes-torchrun/README.md)
+- [06. Multi Node run with deepspeed](05-multi-nodes-deepspeed/README.md)  
+- [07. Monitoring and Profiling jobs](07-monitoring-and-profiling/README.md)
+- [08. TensorBoard visualization](08-TensorBoard-visualization/README.md)
+- [09. MLflow visualization](09-MLflow-visualization/README.md)
+- [10. Wandb visualization](10-Wandb-visualization/README.md)
   
 ### Further reading
 
 - [Snellius Documentation](https://servicedesk.surf.nl/wiki/spaces/WIKI/pages/30660184/Snellius)
-- [NL AI Factory Services]()
