@@ -48,10 +48,15 @@ BIND_PATH=$PROJECT_SPACE
 
 srun apptainer exec --nv -B $BIND_PATH $CONTAINER \
         bash -c "python -m torch.distributed.run \
-                        --nproc_per_node $SLURM_GPUS_PER_NODE --nnodes $SLURM_NNODES \
-                                                            --node_rank $SLURM_PROCID --master_addr $MASTER_ADDR \
-                                                            --master_port $MASTER_PORT \
+                        --nproc_per_node $SLURM_GPUS_PER_NODE \
+                        --nnodes $SLURM_NNODES \
+                        --node_rank $SLURM_PROCID \
+                        --master_addr $MASTER_ADDR \
+                        --master_port $MASTER_PORT \
                         --rdzv_id=\$SLURM_JOB_ID --rdzv_backend=c10d \
                         --rdzv_endpoint="$MASTER_ADDR:$MASTER_PORT" \
-                ds_visiontransformer.py  --deepspeed --deepspeed_config ds_config.json --data_path $IMAGENET"
+                ds_visiontransformer.py  \
+                    --deepspeed \
+                    --deepspeed_config ds_config.json \
+                    --data_path $IMAGENET"
 

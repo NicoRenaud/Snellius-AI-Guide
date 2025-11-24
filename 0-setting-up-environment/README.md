@@ -36,6 +36,8 @@ To inspect which specific packages are included in the images you can use this s
 export CONTAINER=$PROJECT_SPACE/container/snellius-ai-guide-torch-2.7-nvcr.25-10.sif
 apptainer exec $CONTAINER bash -c 'pip list'
 ``` 
+
+
 ## Installing additional Python packages in a container 
 
 You might find yourself in a situation where you want to install extra package inside your container. The first option is of course to build your image once again after adding the desired python packages to the `%post` section of the `build_container.sh` script. Another option is to use a virtual environment on top of the conda environment. For this example, we want to add the HDF5 Python package `h5py` to the environment:

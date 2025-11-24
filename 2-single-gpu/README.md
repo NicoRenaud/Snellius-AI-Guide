@@ -1,6 +1,6 @@
 # 2. First Run on a single GPU
 
-In this first example we are training a vision transformer on the [Tiny ImageNet Dataset](https://paperswithcode.com/dataset/tiny-imagenet) we have just downloaded. We are here using a single GPU and this example is therefore similar to what you can already run on your laptop (provided it has a GPU). The next chapters will explain how to scale up this training run to use multiple gpus on multiple nodes.
+In this first example we are training a vision transformer on the [Tiny ImageNet Dataset](https://paperswithcode.com/dataset/tiny-imagenet) we have just downloaded. This example is similar to the code you can already run on your laptop using a single GPU or CPU. The next chapters will explain how to scale up this training run to use multiple gpus on multiple nodes.
 
 To run the Vision Transformer example, we need to use the provided batch job script [`run.sh`](run.sh) that you can use to run the [`visiontransformer.py`](visiontransformer.py) script on a single GPU.
 
@@ -15,6 +15,14 @@ You can submit then the job to the Snellius scheduler by running:
 ```bash
 sbatch run.sh
 ```
+
+Note that in the shell script we have provided, we are binding the path to the dataset to the container with the command:
+
+```bash
+apptainer exec -B $BIND_PATH $CONTAINER python ....
+```
+
+As explained in the previous chapter, the `-B` option allows to bind the directory specified by `$BIND_PATH` to the container so that our python script can access the datra stored there. 
 
 Once the job starts running, a `slurm-<jobid>.out` file will be created in this directory. This file contains the output of the job and will be updated as the job progresses. The output will show Loss and Accuracy values for each epoch, similar to the following:
 

@@ -16,9 +16,10 @@ import torch.distributed as dist
 dist.init_process_group(backend='nccl')
 ```
 
-Read the local rank from the LOCAL_RANK environment variable.
+Read the local rank from the SLURM_LOCALID environment variable.
+
 ```python
-local_rank = int(os.environ['LOCAL_RANK'])
+local_rank = int(os.environ['SLURM_LOCALID'])
 torch.cuda.set_device(local_rank)
 ```
 
